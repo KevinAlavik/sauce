@@ -1,0 +1,85 @@
+body {
+    font-family: monospace;
+    color: white;
+    background-color: #121212;
+    margin: 0;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+}
+
+.fa-apple {
+    font-size: 35px;
+    transition: opacity .45s;
+}
+
+.fa-apple:hover {
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.main {
+    padding: 1rem;
+}
+
+.app {
+    background-color: #1f1f1f;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    height: 70px;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.app > button {
+    padding: 0rem 1.5rem;
+    border: none;
+    border-radius: 15px;
+    background-color: #0070c9;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translate(0, -50%);
+    height: 30px;
+}
+
+
+.appIcon {
+    width: 50px;
+    border-radius: 25px;
+    padding: 0.75rem;
+}
+
+.appBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.appName {
+    margin: 0;
+}
+
+.appDescription {
+    margin: 0;
+    font-size: 12px;
+    color: gray
+}
