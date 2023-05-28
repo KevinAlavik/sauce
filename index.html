@@ -3,6 +3,7 @@
 -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +12,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/a5ae6c00ff.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
     <div class="main">
         <div class="top">
@@ -19,7 +21,8 @@
                 <p>The 3rd party store for crack addicts</p>
             </div>
             <div class="right">
-                <i class="fa-brands fa-apple" style="color: #ffffff" onclick="window.open('https://twitter.com/pufferisadev', '_parent')"></i>
+                <i class="fa-brands fa-apple" style="color: #ffffff"
+                    onclick="window.open('https://twitter.com/pufferisadev', '_parent')"></i>
             </div>
         </div>
         <div class="apps" id="all-apps">
@@ -38,7 +41,7 @@
     <script>
         var allAppsDiv = document.getElementById('all-apps');
         // Config: Start
-        var repos = ['https://azu0609.github.io/repo/scarlet_repo.json', 'https://usescarlet.com/scarlet.json', 'https://puffer.is-a.dev/repos/main-scarlet.json'];
+        var repos = ['https://azu0609.github.io/repo/scarlet_repo.json', 'https://usescarlet.com/scarlet.json', 'https://puffer.is-a.dev/repos/main-scarlet.json', 'https://puffer.is-a.dev/scylla-ios/cdn/repo.json'];
 
         var mp = 'https://sign.sideloadstore.me/public-cert/xiamen.mobileprovision';
         var p12 = 'https://sign.sideloadstore.me/public-cert/xiamen.p12';
@@ -50,17 +53,19 @@
             for (j = 0; j < results.length; j++) {
                 var repo = repojs.repo.parse(results[j]);
                 var allApps = repojs.repo.getAllCategories(results[j], "META");
+                var scylla = repojs.repo.getAllCategories(results[j], "Info");
                 for (i = 0; i < allApps.length; i++) {
+                var appName = allApps[i].name || scylla[i].name || "No Name"
+                var appIcon = allApps[i].icon || scylla[i].icon || "https://aroundsketch.github.io/Apple-App-Icons/App%20Icon/Apple/AppStore/@PNG.png"
                     output += `<div class="app">`
-                    output += `<img src="${allApps[i].icon}" class="appIcon">`
+                    output += `<img src="${appIcon}" class="appIcon">`
                     output += `<div class="appBody">`
-                    output += `<p class="appName">${allApps[i].name}</p>`
-                    const description = allApps[i].description || ""; // Assign an empty string if description is undefined
-                    // output += `<p class="appDescription">${description.length > 29 ? description.slice(0, 19) + '...' : description}</p>`;
+                    output += `<p class="appName">${appName}</p>`
                     output += `</div>`
                     output += `<button onclick="window.open('https://sign.sideloadstore.me/?ipa=${allApps[i].down}&mp=${mp}&p12=${p12}&password=${password}', '_parent')">Install</button>`
                     output += `</div>`
                 }
+
                 output += '</pre>'
                 repojs.repo.document.append(output || 'Error, ${output} is empty', allAppsDiv);
 
@@ -68,4 +73,5 @@
         })
     </script>
 </body>
+
 </html>
