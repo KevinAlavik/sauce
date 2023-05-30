@@ -41,14 +41,17 @@
     <script>
         var allAppsDiv = document.getElementById('all-apps');
         // Config: Start
-        var repos = ['https://azu0609.github.io/repo/scarlet_repo.json', 'https://usescarlet.com/scarlet.json', 'https://puffer.is-a.dev/repos/main-scarlet.json', 'https://puffer.is-a.dev/scylla-ios/cdn/repo.json', 'https://repo.chariz.com/', 'https://ipa.cypwn.xyz/scarlet.json'];
-
-        var mp = 'https://sign.sideloadstore.me/public-cert/xiamen.mobileprovision';
-        var p12 = 'https://sign.sideloadstore.me/public-cert/xiamen.p12';
-        var password = '1';
+        const config = {
+            repos: ['https://azu0609.github.io/repo/scarlet_repo.json', 'https://usescarlet.com/scarlet.json', 'https://puffer.is-a.dev/repos/main-scarlet.json', 'https://puffer.is-a.dev/scylla-ios/cdn/repo.json', 'https://repo.chariz.com/', 'https://ipa.cypwn.xyz/scarlet.json'],
+            mp: 'https://sign.sideloadstore.me/public-cert/xiamen.mobileprovision',
+            p12: 'https://sign.sideloadstore.me/public-cert/xiamen.p12',
+            password: 1,
+            revoked: true
+        }
         // Config: End
 
-        repojs.repo.loadMulti(repos).then((results) => {
+
+        repojs.repo.loadMulti(config.repos).then((results) => {
             let output = '<pre>';
             for (j = 0; j < results.length; j++) {
                 var repo = repojs.repo.parse(results[j]);
@@ -62,7 +65,11 @@
                     output += `<div class="appBody">`
                     output += `<p class="appName">${appName}</p>`
                     output += `</div>`
-                    output += `<button onclick="window.open('https://sign.sideloadstore.me/?ipa=${allApps[i].down}&mp=${mp}&p12=${p12}&password=${password}', '_parent')">Install</button>`
+                    if(revoked) {
+                        output += `<button onclick="window.alert('Revoked! Come back later')">Install</button>`
+                    } else {
+                        output += `<button onclick="window.open('https://sign.sideloadstore.me/?ipa=${allApps[i].down}&mp=${config.mp}&p12=${config.p12}&password=${config.password}', '_parent')">Install</button>`
+                    }
                     output += `</div>`
                 }
 
